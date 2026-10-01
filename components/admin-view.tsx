@@ -31,6 +31,7 @@ const sidebarItems = [
   { id: "overview", label: "Overview", icon: LayoutDashboard },
   { id: "analytics", label: "Analytics", icon: BarChart3 },
   { id: "components", label: "Components", icon: Boxes },
+  { id: "data", label: "Data", icon: Database },
   { id: "activity", label: "Activity", icon: Activity },
   { id: "settings", label: "Settings", icon: Settings },
 ] as const;
@@ -46,6 +47,13 @@ const activities = [
   { label: "Checkout flow published", detail: "Production / 04 minutes ago", tone: "lime" as const },
   { label: "Component token synced", detail: "Design system / 17 minutes ago", tone: "blue" as const },
   { label: "New workspace created", detail: "Northstar team / 32 minutes ago", tone: "orange" as const },
+];
+
+const dataRows = [
+  { name: "Checkout system", owner: "Commerce", status: "Healthy", tone: "lime" as const, sync: "04 min ago", coverage: "98.6%" },
+  { name: "Token registry", owner: "Design ops", status: "Syncing", tone: "blue" as const, sync: "17 min ago", coverage: "94.2%" },
+  { name: "Component catalog", owner: "Frontend", status: "Healthy", tone: "lime" as const, sync: "32 min ago", coverage: "100%" },
+  { name: "Telemetry stream", owner: "Platform", status: "Review", tone: "orange" as const, sync: "48 min ago", coverage: "87.4%" },
 ];
 
 const carouselSlides = [
@@ -230,6 +238,40 @@ export function AdminView() {
                 <div className="admin-control-row admin-control-row--input"><label htmlFor="admin-command">Command input</label><div className="admin-command-input"><HybridInput id="admin-command" placeholder="Type a directive..." /><kbd>↵</kbd></div></div>
               </GlassCard>
             </div>
+          </section>
+
+          <section className="admin-data-section" id="data">
+            <div className="admin-section-heading">
+              <div><span className="eyebrow">06 / DATA SURFACE</span><h2>Make the signal <em>scannable.</em></h2></div>
+              <p>A dense table pattern for operational records, status states, ownership, and coverage at a glance.</p>
+            </div>
+            <GlassCard accent="blue" className="admin-table-panel">
+              <div className="admin-table-panel__header">
+                <div><span className="eyebrow">WORKSPACE REGISTRY / 04 RECORDS</span><h3>Connected systems</h3></div>
+                <HybridButton variant="ghost">EXPORT CSV <ArrowUpRight size={14} /></HybridButton>
+              </div>
+              <div className="admin-table-scroll">
+                <table className="admin-table">
+                  <caption className="sr-only">Connected systems and their current health</caption>
+                  <thead>
+                    <tr><th scope="col">System</th><th scope="col">Owner</th><th scope="col">Status</th><th scope="col">Last sync</th><th scope="col">Coverage</th><th scope="col"><span className="sr-only">Open</span></th></tr>
+                  </thead>
+                  <tbody>
+                    {dataRows.map((row) => (
+                      <tr key={row.name}>
+                        <th scope="row"><span className="admin-table__system-mark" />{row.name}</th>
+                        <td>{row.owner}</td>
+                        <td><StatusNode label={row.status} tone={row.tone} animated={false} /></td>
+                        <td>{row.sync}</td>
+                        <td><div className="admin-table__coverage"><span><i style={{ width: row.coverage }} /></span><strong>{row.coverage}</strong></div></td>
+                        <td><button className="admin-table__open" type="button" aria-label={`Open ${row.name}`}><ArrowUpRight size={14} /></button></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="admin-table-panel__footer"><span>SHOWING 04 OF 04 SYSTEMS</span><span><Check size={13} /> DATA REFRESHED 08MS AGO</span></div>
+            </GlassCard>
           </section>
 
           <section className="admin-settings" id="settings" aria-label="Workspace status">
