@@ -20,8 +20,8 @@ import { GlassCard } from "@/components/ui/glass-card";
 import { HybridButton } from "@/components/ui/hybrid-button";
 import { HybridInput } from "@/components/ui/hybrid-input";
 import { StatusNode } from "@/components/ui/status-node";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { SystemConsole } from "@/components/system-console";
+import { SiteHeader } from "@/components/site-header";
 
 const layers = [
   {
@@ -71,26 +71,7 @@ const layers = [
 export default function Home() {
   return (
     <main>
-      <header className="site-header">
-        <a href="#top" className="wordmark" aria-label="Hybrid 06 home">
-          <span className="wordmark__symbol">
-            <span />
-            <span />
-          </span>
-          HYBRID<span>/06</span>
-        </a>
-        <nav className="site-nav" aria-label="Primary navigation">
-          <a href="#system">SYSTEM</a>
-          <a href="#components">COMPONENTS</a>
-          <a href="#principles">PRINCIPLES</a>
-        </nav>
-        <div className="header-actions">
-          <ThemeToggle />
-          <a href="#components" className="header-cta">
-            EXPLORE <ArrowRight size={15} />
-          </a>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section id="top" className="hero section-shell">
         <div className="hero__signal" aria-hidden="true">
