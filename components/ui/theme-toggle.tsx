@@ -9,13 +9,13 @@ type Theme = "light" | "dark" | "mono-light" | "mono-dark";
 function getNextTheme(theme: Theme): Theme {
   switch (theme) {
     case "light":
-      return "dark";
-    case "dark":
-      return "mono-light";
-    case "mono-light":
       return "mono-dark";
-    case "mono-dark":
+    case "dark":
       return "light";
+    case "mono-light":
+      return "dark";
+    case "mono-dark":
+      return "mono-light";
   }
 }
 
@@ -44,10 +44,10 @@ export function ThemeToggle() {
   const isDark = theme === "dark" || theme === "mono-dark";
   const isMonochrome = theme === "mono-light" || theme === "mono-dark";
   const nextThemeLabel = {
-    light: "DARK",
-    dark: "MONO LIGHT",
-    "mono-light": "MONO DARK",
-    "mono-dark": "LIGHT",
+    light: "MONO DARK",
+    dark: "LIGHT",
+    "mono-light": "DARK",
+    "mono-dark": "MONO LIGHT",
   }[theme];
 
   return (

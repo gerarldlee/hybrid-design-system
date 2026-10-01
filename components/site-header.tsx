@@ -17,6 +17,9 @@ export function SiteHeader({ activePath }: SiteHeaderProps) {
         HYBRID<span>/06</span>
       </Link>
       <nav className="site-nav" aria-label="Primary navigation">
+        <Link href="/#system">SYSTEM</Link>
+        <Link href="/#components">COMPONENTS</Link>
+        <Link href="/#principles">PRINCIPLES</Link>
         <Link
           href="/dashboard"
           className={activePath === "dashboard" ? "is-current" : undefined}
@@ -24,9 +27,6 @@ export function SiteHeader({ activePath }: SiteHeaderProps) {
         >
           DASHBOARD
         </Link>
-        <Link href="/#system">SYSTEM</Link>
-        <Link href="/#components">COMPONENTS</Link>
-        <Link href="/#principles">PRINCIPLES</Link>
       </nav>
       <div className="header-actions">
         <ThemeToggle />
