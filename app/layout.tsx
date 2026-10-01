@@ -3,6 +3,20 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
+const themeScript = `(() => {
+  try {
+    const stored = localStorage.getItem("hybrid-theme");
+    const theme = stored === "dark" || stored === "light"
+      ? stored
+      : window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    document.documentElement.dataset.theme = theme;
+  } catch {
+    document.documentElement.dataset.theme = "light";
+  }
+})();`;
+
 export const metadata: Metadata = {
   title: "HYBRID/06 — System UI",
   description:
@@ -13,7 +27,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>{children}</body>
     </html>
   );

@@ -20,6 +20,7 @@ import { GlassCard } from "@/components/ui/glass-card";
 import { HybridButton } from "@/components/ui/hybrid-button";
 import { HybridInput } from "@/components/ui/hybrid-input";
 import { StatusNode } from "@/components/ui/status-node";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { SystemConsole } from "@/components/system-console";
 
 const layers = [
@@ -83,9 +84,12 @@ export default function Home() {
           <a href="#components">COMPONENTS</a>
           <a href="#principles">PRINCIPLES</a>
         </nav>
-        <a href="#components" className="header-cta">
-          EXPLORE <ArrowRight size={15} />
-        </a>
+        <div className="header-actions">
+          <ThemeToggle />
+          <a href="#components" className="header-cta">
+            EXPLORE <ArrowRight size={15} />
+          </a>
+        </div>
       </header>
 
       <section id="top" className="hero section-shell">
