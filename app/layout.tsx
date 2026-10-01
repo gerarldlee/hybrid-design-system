@@ -6,7 +6,7 @@ import "./globals.css";
 const themeScript = `(() => {
   try {
     const stored = localStorage.getItem("hybrid-theme");
-    const theme = stored === "dark" || stored === "light"
+    const theme = stored === "dark" || stored === "light" || stored === "mono-light" || stored === "mono-dark"
       ? stored
       : window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"

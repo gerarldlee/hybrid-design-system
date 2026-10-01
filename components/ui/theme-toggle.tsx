@@ -1,17 +1,29 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
+import { Contrast, Moon, Sun } from "lucide-react";
 import { useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "hybrid-theme";
-type Theme = "light" | "dark";
+type Theme = "light" | "dark" | "mono-light" | "mono-dark";
 
 function getNextTheme(theme: Theme): Theme {
-  return theme === "dark" ? "light" : "dark";
+  switch (theme) {
+    case "light":
+      return "dark";
+    case "dark":
+      return "mono-light";
+    case "mono-light":
+      return "mono-dark";
+    case "mono-dark":
+      return "light";
+  }
 }
 
 function getTheme(): Theme {
-  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+  const theme = document.documentElement.dataset.theme;
+  return theme === "dark" || theme === "mono-light" || theme === "mono-dark"
+    ? theme
+    : "light";
 }
 
 function subscribe(callback: () => void) {
@@ -29,22 +41,31 @@ export function ThemeToggle() {
     window.dispatchEvent(new Event("hybrid-theme-change"));
   }
 
-  const isDark = theme === "dark";
+  const isDark = theme === "dark" || theme === "mono-dark";
+  const isMonochrome = theme === "mono-light" || theme === "mono-dark";
+  const nextThemeLabel = {
+    light: "DARK",
+    dark: "MONO LIGHT",
+    "mono-light": "MONO DARK",
+    "mono-dark": "LIGHT",
+  }[theme];
 
   return (
     <button
       type="button"
       className="theme-toggle"
-      aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
-      aria-pressed={isDark}
+      aria-label={`Switch to ${nextThemeLabel.toLowerCase()} theme`}
+      aria-pressed={isDark || isMonochrome}
       onClick={toggleTheme}
     >
-      {isDark ? (
+      {isMonochrome ? (
+        <Contrast size={15} aria-hidden="true" />
+      ) : isDark ? (
         <Sun size={15} aria-hidden="true" />
       ) : (
         <Moon size={15} aria-hidden="true" />
       )}
-      <span>{isDark ? "LIGHT" : "DARK"}</span>
+      <span>{nextThemeLabel}</span>
     </button>
   );
 }

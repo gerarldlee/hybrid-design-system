@@ -47,8 +47,8 @@ export function SystemConsole() {
           >
             <defs>
               <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#b8ff38" stopOpacity=".35" />
-                <stop offset="100%" stopColor="#b8ff38" stopOpacity="0" />
+                <stop offset="0%" stopColor="var(--signal)" stopOpacity=".35" />
+                <stop offset="100%" stopColor="var(--signal)" stopOpacity="0" />
               </linearGradient>
             </defs>
             <path
