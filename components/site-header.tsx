@@ -30,7 +30,7 @@ export function SiteHeader({ activePath }: SiteHeaderProps) {
       </nav>
       <div className="header-actions">
         <ThemeToggle />
-        <Link href="/#components" className="header-cta">
+        <Link href="/admin" className="header-cta">
           EXPLORE <ArrowRight size={15} />
         </Link>
       </div>
